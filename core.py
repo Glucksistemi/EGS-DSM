@@ -12,6 +12,7 @@ try:
         if line:
             for parser in parsers:
                 parser.parse(line)
+        
 except:
     connection.close()
     raise
