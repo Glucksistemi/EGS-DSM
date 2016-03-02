@@ -9,6 +9,7 @@ break_condition = 0
 try:
     while not break_condition:
         line = connection.read_until('\r\n',1)
+        print line
         if line:
             for parser in parsers:
                 parser.parse(line)

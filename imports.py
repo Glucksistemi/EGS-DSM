@@ -1,10 +1,10 @@
-def get_object_by_path(name):
-    components = name.split('.')
-    mod = __import__(components[0])
-    for comp in components[1:]:
-        mod = getattr(mod, comp)
-    return mod
+from importlib import import_module
+
+
+def get_class_by_path(name):
+    parts = name.split('.')
+    return getattr(import_module('.'.join(parts[0:-1])), parts[-1])
 
 
 def create_list_of_imported_objects(classlist):
-    return [get_object_by_path(name)() for name in classlist]
+    return [get_class_by_path(name)() for name in classlist]

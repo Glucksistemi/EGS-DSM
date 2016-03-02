@@ -1,5 +1,5 @@
 HOST = 'shpiler.net'
-PASSWORD = 'JebKerman'
+PASSWORD = '_______'
 PARSERS = (
-    'parsers.tryParse'
+    'parsers.heartbeat.HeartBeatParser',
 )

@@ -1,10 +1,12 @@
 import re
 
+
 class Parser():
     regexp = ''
     regexp_object = None
     def __init__(self):
         self.regexp_object = re.compile(self.regexp)
+        self.on_init()
 
     def parse(self, line):
         result = self.regexp_object.match(line)
@@ -12,6 +14,9 @@ class Parser():
             self.on_match(line, result)
 
     def on_match(self, line, match_object):
+        pass
+
+    def on_init(self):
         pass
 
 
