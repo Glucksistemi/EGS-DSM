@@ -21,13 +21,18 @@ class Parser():
 
 
 class Asker():
+    request_name = ''
     response_parser = Parser()
     wait_for_response = False
 
     def __init__(self):
         pass
 
-    def on_ask(self, *args, **kwargs):
+    def ask(self, request):
+        if request.split[1] == self.request_name:
+            self.on_ask(request)
+
+    def on_ask(self, request):
         self.wait_for_response = True
         #todo: prepare string for writing, send it to writer's bufer or whatever
 
