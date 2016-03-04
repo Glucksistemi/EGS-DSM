@@ -7,6 +7,7 @@ PASSWORD = '_______'
 SOCKET_CONTROL_LENGTH = 5
 TCP_PORT = 42404
 
+# workers collections
 PARSERS = (
     'parsers.heartbeat.HeartBeatParser',
 )

@@ -32,4 +32,4 @@ class SocketHandler():
         self.socket.close()
 
 
-
+# TODO: add ClientSocket class to be added for askers who can ask to

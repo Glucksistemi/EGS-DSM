@@ -1,13 +1,13 @@
-from connections.telnet import get_logged_connection
+from connections.telnet import get_authorized_connection
 from connections.tcp import SocketHandler
 import settings
 import imports
-
-telnet_connect = get_logged_connection(settings.HOST, settings.PASSWORD, settings.TELNET_PORT)
+#TODO: Log handling (take it from my xlsx2xml and add log-leveling logic
+telnet_connect = get_authorized_connection(settings.HOST, settings.PASSWORD, settings.TELNET_PORT)
 tcp_connect = SocketHandler(settings.TCP_PORT, settings.SOCKET_CONTROL_LENGTH)
 
 parsers = imports.create_list_of_imported_objects(settings.PARSERS)
-askers = [] #TODO: write one-two basic askers and treat them like parsers
+askers = imports.create_list_of_imported_objects(settings.ASKERS)
 
 break_condition = 0
 
@@ -21,7 +21,12 @@ try:
         request = tcp_connect.get_data_from_socket()
         if request:
             for asker in askers:
-                asker.
+                if asker.wait_for_response:
+                    asker.parse(line, telnet_connect)
+                else:
+                    command = asker.ask(request)
+                    if command:
+                        telnet_connect.write(command + '\n')
 
         
 except:
