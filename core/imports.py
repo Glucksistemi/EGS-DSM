@@ -14,8 +14,8 @@ def create_list_of_imported_objects(classlist):
 
 def create_dict_of_imported_objects(classdict):
     objdict = {}
-    for name, classname in classdict:
-        objdict[name] = get_class_by_path(classname)
+    for name, classname in classdict.iteritems():
+        objdict[name] = get_class_by_path(classname)()
     return objdict
 
 # Following code was taken from importLib due to some strange problems with importing importlib

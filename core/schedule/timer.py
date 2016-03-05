@@ -14,7 +14,7 @@ class ScheduledTask:
 
     def get_command(self):
         if time.time() >= self.next_launch:
-            self.repeater.schedule_next_launch()
+            self.next_launch = self.repeater.schedule_next_launch()
             return self.command
         return None
 
@@ -42,6 +42,6 @@ class Timer():
         :return: True if created/rewritten, False if existing and not rewritten
         """
         if not task['name'] in self.tasks or replace:
-            self.tasks[task['name']] = ScheduledTask(task['command'], task['repeater'], task['params'])
+            self.tasks[task['name']] = ScheduledTask(task['command'], task['repeater'], **task['params'])
             return True
         return False

@@ -56,10 +56,7 @@ class Asker(RegexpDriven):
     onmatch_method_name = 'on_response'
 
     def ask(self, request):
-        if request.split()[0] == self.request_name:
-            return self.on_ask(request)
-        else:
-            return None, None
+        return self.on_ask(request)
 
     def on_ask(self, request):
         """
