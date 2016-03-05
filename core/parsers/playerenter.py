@@ -1,7 +1,7 @@
 from core.workers import Parser
 
 
-class HeartBeatParser(Parser):
+class PlayerEnterParser(Parser):
     """parser for message when player enters. typical string = '[PA] Player 76561198056103537/'Shpiler' logged in'"""
     regexp = r"^\[..] Player (?P<ID>\d+)\/'(?P<name>\w+)' logged in$"
 
