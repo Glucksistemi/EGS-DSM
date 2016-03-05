@@ -1,5 +1,6 @@
 from core.workers import Asker
 
+
 class ChatAsker(Asker):
     request_name = 'say'
     regexp = '$Message...' # TODO: write regexp
