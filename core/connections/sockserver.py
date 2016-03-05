@@ -5,12 +5,17 @@ class SocketHandler():
     socket = None
     connection = None
     control_length = 5
+    test_other_try = 0
 
     def __init__(self, port, control_length=5):
+        if self.test_other_try:
+            raise Exception('some bullshit happened')
         self.socket = socket.socket()
         self.socket.bind(('', port))
+        self.socket.settimeout(0.1)
         self.control_length = control_length
         self.socket.listen(1)
+        self.test_other_try = 1
 
     def get_data_from_socket(self):
         try: # avoid timeout errors to allow looping
