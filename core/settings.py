@@ -17,10 +17,11 @@ ASKERS = {
 
 SCHEDULE = (
     {
-        'command': '',
-        'name': '',
+        'command': 'chat test command',
+        'name': 'test',
+        'repeater': 'interval',
         'params': {
-            'interval': 3600,  # seconds
+            'interval': 5,  # seconds
         }
     },
 )

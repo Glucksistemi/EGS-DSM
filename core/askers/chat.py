@@ -3,10 +3,10 @@ from core.workers import Asker
 
 class ChatAsker(Asker):
     request_name = 'say'
-    regexp = '$Message...' # TODO: write regexp
+    regexp = "^Message .*$" # TODO: write regexp
 
     def on_ask(self, request):
-        return "say '" + request.replace("'", "`") + "'"
+        return "say '" + request.replace("'", "`") + "'", True
 
-    def on_response(self, match_object, response, connection):
-        return 'message sent'
+    def on_response(self, match_object, response):
+        return 'message sent', False

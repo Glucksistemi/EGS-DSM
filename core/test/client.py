@@ -1,5 +1,5 @@
 import socket
-port = raw_input('enter local port to connect')
+port = int(raw_input('enter local port to connect'))
 
 try:
     while True:

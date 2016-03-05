@@ -31,7 +31,7 @@ class SocketHandler():
 
     def send_response(self, response):
         length = str(len(response)).zfill(5)
-        self.connection.send()
+        self.connection.send(length+response)
 
     def close(self):
         self.socket.close()
