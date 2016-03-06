@@ -2,7 +2,7 @@ from core.workers import Parser
 from core.connections.database.handler import save_logon_event
 
 
-class HeartBeatParser(Parser):
+class PlayerEnterParser(Parser):
     """parser for message when player enters. typical string = '[PA] Player 76561198056103537/'Shpiler' logged in'"""
     regexp = r"^\[..] Player (?P<steam_id>\d+)\/'(?P<nick_name>\w+)' logged in$"
 
