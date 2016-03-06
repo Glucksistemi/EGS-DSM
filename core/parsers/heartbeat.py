@@ -1,4 +1,5 @@
 from core.workers import Parser
+from core.connections.database.handler import save_heartbeat
 
 
 class HeartBeatParser(Parser):
@@ -7,3 +8,6 @@ class HeartBeatParser(Parser):
 
     def on_match(self, line, match_object, *args):
         print match_object.groupdict()
+        groupdict = match_object.groupdict()
+        del groupdict['date']
+        save_heartbeat(**groupdict)

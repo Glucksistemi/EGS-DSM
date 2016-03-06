@@ -14,6 +14,7 @@ class RegexpDriven():
         pass
 
     def parse(self, line):
+        print line, self.__class__
         result = self.regexp_object.match(line)
         if result:
             return self.call_onmatch_metod(line, result)

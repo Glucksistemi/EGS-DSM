@@ -21,6 +21,7 @@ try:
         request = None
         line = telnet_connect.read_until('\r\n',0.1)
         if line:
+            line = line.replace('\r\n', '') #  no EOL - no cross-platform problems;)
             if waiting_asker:
                 response, wait_flag = askers[waiting_asker].parse(line)
                 if response and not wait_flag:

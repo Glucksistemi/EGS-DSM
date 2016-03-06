@@ -21,7 +21,11 @@ SCHEDULE = (
         'name': 'test',
         'repeater': 'interval',
         'params': {
-            'interval': 5,  # seconds
+            'interval': 60,  # seconds
         }
     },
 )
+
+DATABASE = {
+    ''
+}
