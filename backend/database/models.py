@@ -5,7 +5,7 @@ class HeartBeat(models.Model):
     class Meta:
         db_table = 'heartbeat'
     datetime = models.DateTimeField()
-    uptime = models.TextField()
+    uptime = models.IntegerField()
     heap = models.FloatField()
     fps = models.FloatField()
     players = models.IntegerField()

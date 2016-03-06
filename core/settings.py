@@ -36,3 +36,15 @@ DATABASE = {
         'password': '123QWErty'
     }
 }
+
+LOG_LEVEL_DEBUG = 3
+LOG_LEVEL_WARN = 2
+LOG_LEVEL_ERROR = 1
+
+LOG_LEVELS = {
+    'database': LOG_LEVEL_ERROR,
+    'file': LOG_LEVEL_WARN,
+    'stdout': LOG_LEVEL_DEBUG,
+}
+
+LOG_FILE = '/home/gluck/dsm{}.log'

@@ -66,3 +66,12 @@ class ChatMessage(Model):
     datetime = DateTimeField()
     player = ForeignKeyField(Player, to_field='steam_id')
     message = CharField(max_length=1024)
+
+
+class CoreLog(Model):
+    class Meta:
+        database = db
+        db_table = 'corelog'
+    datetime = DateTimeField()
+    level = CharField(max_length=5)
+    message = CharField(max_length=512)

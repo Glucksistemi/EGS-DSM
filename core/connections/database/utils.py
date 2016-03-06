@@ -29,10 +29,7 @@ def get_player(nick_name = '', steam_id = ''):
 
 def save_logon_event(action, nick_name='', steam_id=''):
     print 'logon_action'
-    # player = get_player(nick_name, steam_id)
     player = Player.get(nick_name=nick_name)
-    var = player.steam_id
-    #print(player.steam_id)
     PlayerLogonEvent.create(
         player_id=get_player(nick_name, steam_id),
         datetime=datetime.datetime.now(),
