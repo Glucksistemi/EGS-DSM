@@ -1,5 +1,6 @@
 from core.workers import Parser
-from core.connections.database.handler import save_heartbeat
+from core.connections.database.models import HeartBeat
+import datetime
 
 
 class HeartBeatParser(Parser):
@@ -9,5 +10,12 @@ class HeartBeatParser(Parser):
     def on_match(self, line, match_object, *args):
         print match_object.groupdict()
         groupdict = match_object.groupdict()
+        uptime = int(groupdict['hours']) * 60 + int(groupdict['minutes'])
         del groupdict['date']
-        save_heartbeat(**groupdict)
+        HeartBeat.create(
+            datetime = datetime.datetime.now(),
+            uptime=str(uptime),
+            heap=float(groupdict['heap']),
+            fps=float(groupdict['fps']),
+            players=int(groupdict['players'])
+        )

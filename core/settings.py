@@ -10,6 +10,7 @@ TCP_PORT = 42404
 # workers collections
 PARSERS = (
     'parsers.heartbeat.HeartBeatParser',
+    'parsers.playerenter.PlayerEnterParser',
 )
 ASKERS = {
     'chat': 'core.askers.chat.ChatAsker',
@@ -27,5 +28,11 @@ SCHEDULE = (
 )
 
 DATABASE = {
-    ''
+    'type': 'mysql',  # available: sqlite, postgress
+    'name': 'egsdsm',  # database/schema name
+    'params': {  # parameters for connection
+        'host': 'localhost',
+        'user': 'egsdsm',
+        'password': '123QWErty'
+    }
 }

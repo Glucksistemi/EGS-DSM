@@ -1,14 +1,25 @@
-from peewee import MySQLDatabase, Model, DateTimeField, TextField, FloatField, IntegerField, ForeignKeyField, CharField
+from peewee import MySQLDatabase, SqliteDatabase, PostgresqlDatabase, Model, DateTimeField, FloatField, IntegerField, ForeignKeyField, CharField, ImproperlyConfigured
 
 db = MySQLDatabase('egsdsm', host='localhost', user='egsdsm', password='123QWErty')
 
+
+def get_db(**kwargs):
+    dbtype = {
+        'mysql': MySQLDatabase,
+        'sqlite': SqliteDatabase,
+        'postgres': PostgresqlDatabase
+    }
+    try:
+        db = dbtype[kwargs['type']](kwargs['name'], **kwargs['params'])
+    except KeyError:
+        raise ImproperlyConfigured
 
 class HeartBeat(Model):
     class Meta:
         database = db
         db_table = 'heartbeat'
     datetime = DateTimeField()
-    uptime = TextField()
+    uptime = IntegerField()
     heap = FloatField()
     fps = FloatField()
     players = IntegerField()
@@ -44,7 +55,7 @@ class PlayerLogonEvent(Model):
         database = db
         db_table = 'player_logons'
     datetime = DateTimeField()
-    player = ForeignKeyField(Player, to_field='steam_id')
+    player_id = ForeignKeyField(Player, to_field='steam_id', related_name='logon_events')
     action = IntegerField()  # 0 - asked for login, 1 - logged in, 2 - logged out
 
 
