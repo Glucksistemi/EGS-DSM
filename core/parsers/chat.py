@@ -1,4 +1,7 @@
 from core.workers import Parser
+from core.connections.database.models import ChatMessage
+from core.connections.database.utils import get_player
+import datetime
 
 
 class ChatParser(Parser):
@@ -6,4 +9,9 @@ class ChatParser(Parser):
     regexp = r'^[0-9:.-]{15} CHAT: (?P<nick_name>\w+): (?P<msg>.*)$'
 
     def on_match(self, line, match_object, *args):
-        print match_object.groupdict()
+        gdict = match_object.groupdict()
+        ChatMessage.create(
+            datetime=datetime.datetime.now(),
+            player=get_player(gdict['nick_name']),
+            message=gdict['msg']
+        )
