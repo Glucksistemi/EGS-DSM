@@ -2,7 +2,7 @@ from core.workers import Parser
 from core.connections.database.utils import save_logon_event
 
 
-class PlayerConnectedParser(Parser):
+class PlayerDisonnectedParser(Parser):
     """parser for message when player logs in. typical string = '[PA] Player 76561198056103537/'Shpiler' logged in'"""
     regexp = r"^[0-9:.-]{15} \[..] Player (?P<steam_id>\d+)\/'(?P<nick_name>\w+)' logged off$"
 
