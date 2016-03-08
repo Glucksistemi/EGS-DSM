@@ -22,9 +22,8 @@ def get_player(nick_name = '', steam_id = ''):
         except Player.DoesNotExist:
             player = Player.create(steam_id=steam_id, nick_name=nick_name)
         if nick_name != player.nick_name:
-            player.nick_name = nick_name
+            player.nick_name = nick_name  # TODO: test for it
         return player
-
 
 
 def save_logon_event(action, nick_name='', steam_id=''):
