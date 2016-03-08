@@ -9,8 +9,13 @@ TCP_PORT = 42404
 
 # workers collections
 PARSERS = (
+    'parsers.chat.ChatParser',
     'parsers.heartbeat.HeartBeatParser',
-    'parsers.playerenter.PlayerEnterParser',
+    'parsers.playerenterpf.PlayerEnterPFParser',
+    'parsers.playerexitpf.PlayerExitPFParser',
+    'parsers.playerconnected.PlayerConnectedParser',
+    'parsers.playerdisconnected.PlayerDisconnectedParser',
+    'parsers.loginask.LoginAskParser'
 )
 ASKERS = {
     'chat': 'core.askers.chat.ChatAsker',
