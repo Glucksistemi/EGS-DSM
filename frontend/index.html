@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <!--Load all JS-->
+    <script src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
     <title>Title</title>
 </head>
 <body>
+<div class="main_container" ng-app ng-controller="frontEndCtrl">
+<div class="header">
+    <div class="headers">
+        <h1>Dedicated Server Manager for Empyrion: Galactic Survival</h1>
+        <h2 ng-if="!authorized">Сервер: <span>{{server.name}}</span></h2>
+        <h2 ng-if="authorized">Не авторизован</h2>
+    </div>
+    <div class="main_stats" ng-if="authorized">
+        <table>
+            <tr>
+                <td>Аптайм</td><td>{{mainstats.uptime}}</td>
+            </tr>
+            <tr>
+                <td>Игроков онлайн</td><td>{{mainstats.players}}</td>
+            </tr>
+            <tr>
+                <td></td><td>{{mainstats.playfields.total}}</td>
+            </tr>
+        </table>
+    </div>
 
+</div>
+<div class="mainfield" ng-controller="mainCtrl">
+</div>
+<div class="footer">
+
+</div>
+</div>
 </body>
 </html>
