@@ -3,7 +3,6 @@ import sys
 
 def get_class_by_path(name):
     parts = name.split('.')
-    print name
     module = import_module('.'.join(parts[0:-1]))
     return getattr(import_module('.'.join(parts[0:-1])), parts[-1])
 

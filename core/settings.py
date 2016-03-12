@@ -14,7 +14,7 @@ PARSERS = (
     'parsers.playerenterpf.PlayerEnterPFParser',
     'parsers.playerexitpf.PlayerExitPFParser',
     'parsers.playerconnected.PlayerConnectedParser',
-    'parsers.playerdisconnected.PlayerDisconnectedParser',
+    'parsers.playerdisconnected.PlayerDisonnectedParser',
     'parsers.loginask.LoginAskParser'
 )
 ASKERS = {
@@ -22,24 +22,29 @@ ASKERS = {
 }
 
 SCHEDULE = (
-    {
-        'command': 'chat test command',
-        'name': 'test',
-        'repeater': 'interval',
-        'params': {
-            'interval': 60,  # seconds
-        }
-    },
+    # {
+    #     'command': 'chat test command',
+    #     'name': 'test',
+    #     'repeater': 'interval',
+    #     'params': {
+    #         'interval': 1,  # seconds
+    #     }
+    # },
 )
 
+# DATABASE = {
+#     'type': 'mysql',  # available: sqlite, postgress
+#     'name': 'egsdsm',  # database/schema name
+#     'params': {  # parameters for connection
+#         'host': 'localhost',
+#         'user': 'egsdsm',
+#         'password': '123QWErty'
+#     }
+# }
 DATABASE = {
-    'type': 'mysql',  # available: sqlite, postgress
-    'name': 'egsdsm',  # database/schema name
-    'params': {  # parameters for connection
-        'host': 'localhost',
-        'user': 'egsdsm',
-        'password': '123QWErty'
-    }
+    'type': 'sqlite',
+    'name': '/home/gluck/test.db',
+    'params': {}
 }
 
 LOG_LEVEL_DEBUG = 3

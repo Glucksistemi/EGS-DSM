@@ -3,7 +3,7 @@ from core.workers import Asker
 
 class ChatAsker(Asker):
     request_name = 'say'
-    regexp = "^Message '.*$' sent to all clients"
+    regexp = "^Message '.*$"
 
     def on_ask(self, request):
         return "say '" + request.replace("'", "`") + "'", True

@@ -1,4 +1,5 @@
 import re
+from log import log
 
 
 class RegexpDriven():
@@ -14,7 +15,6 @@ class RegexpDriven():
         pass
 
     def parse(self, line):
-        print line, self.__class__
         result = self.regexp_object.match(line)
         if result:
             return self.call_onmatch_metod(line, result)
@@ -23,8 +23,10 @@ class RegexpDriven():
         try:
             return getattr(self, self.onmatch_method_name, '')(*args, **kwargs)
         except AttributeError:
+            log.log('error', 'wrong onmatch (AttributeError)')
             return None
         except TypeError:
+            log.log('error', 'wrong onmatch (TypeError)')
             return None
 
 

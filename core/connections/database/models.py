@@ -1,6 +1,6 @@
 from peewee import MySQLDatabase, SqliteDatabase, PostgresqlDatabase, Model, DateTimeField, FloatField, IntegerField, ForeignKeyField, CharField, ImproperlyConfigured
-
-db = MySQLDatabase('egsdsm', host='localhost', user='egsdsm', password='123QWErty')
+from core.settings import DATABASE
+#db = MySQLDatabase('egsdsm', host='localhost', user='egsdsm', password='123QWErty')
 
 
 def get_db(**kwargs):
@@ -10,9 +10,12 @@ def get_db(**kwargs):
         'postgres': PostgresqlDatabase
     }
     try:
-        db = dbtype[kwargs['type']](kwargs['name'], **kwargs['params'])
+        return dbtype[kwargs['type']](kwargs['name'], **kwargs['params'])
     except KeyError:
         raise ImproperlyConfigured
+
+db = get_db(**DATABASE)
+
 
 class HeartBeat(Model):
     class Meta:
