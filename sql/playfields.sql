@@ -1,0 +1,18 @@
+INSERT INTO `playfields` (`id`, `name`) VALUES
+(1, 'Akua Orbit'),
+(2, 'Akua'),
+(3, 'Akua Moon'),
+(4, 'Omicron'),
+(5, 'Omicron Orbit'),
+(6, 'Omicron Moon'),
+(7, 'Ningues'),
+(8, 'Ningues Orbit'),
+(9, 'Aestus'),
+(10, 'Aestus Orbit'),
+(11, 'Asteroid Field'),
+(12, 'Alien Outpost'),
+(13, 'Masperron'),
+(14, 'Masperron Orbit'),
+(15, 'Trading Outpost'),
+(16, 'Aitis'),
+(17, 'Aitis Orbit');
