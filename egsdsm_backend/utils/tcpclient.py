@@ -1,5 +1,5 @@
 import socket
-from .settings import SOCKET_CONNECTION
+from egsdsm_backend.egsdsm_backend.settings import SOCKET_CONNECTION
 
 
 def tcp_request(string):

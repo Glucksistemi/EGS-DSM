@@ -12,6 +12,7 @@ def get_player(nick_name = '', steam_id = ''):
     :param may_be_new:
     :return:Player object
     """
+
     if nick_name and not steam_id:
         player = Player.get(nick_name=nick_name)
     elif steam_id and not nick_name:
@@ -38,6 +39,7 @@ def save_logon_event(action, nick_name='', steam_id=''):
 
 def save_playfield_change(action, nick_name='', steam_id='', playfield=''):
     player = get_player(nick_name, steam_id)
+
     PlayerTransferEvent.create(
         datetime=datetime.datetime.now(),
         player_id=player,

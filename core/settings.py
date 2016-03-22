@@ -32,20 +32,20 @@ SCHEDULE = (
     # },
 )
 
-# DATABASE = {
-#     'type': 'mysql',  # available: sqlite, postgress
-#     'name': 'egsdsm',  # database/schema name
-#     'params': {  # parameters for connection
-#         'host': 'localhost',
-#         'user': 'egsdsm',
-#         'password': '123QWErty'
-#     }
-# }
 DATABASE = {
-    'type': 'sqlite',
-    'name': '/home/gluck/test.db',
-    'params': {}
+    'type': 'mysql',  # available: sqlite, postgress
+    'name': 'egsdsm',  # database/schema name
+    'params': {  # parameters for connection
+        'host': 'localhost',
+        'user': 'egsdsm',
+        'password': '123QWErty'
+    }
 }
+# DATABASE = {
+#     'type': 'sqlite',
+#     'name': '/home/gluck/test.db',
+#     'params': {}
+# }
 
 LOG_LEVEL_DEBUG = 3
 LOG_LEVEL_WARN = 2
