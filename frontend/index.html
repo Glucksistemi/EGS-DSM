@@ -6,16 +6,13 @@
     <script src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="" src="js/directives.js"></script>
+    <!--css-->
+    <link rel="stylesheet" href="css/base.css">
     <title>Dedicated Server Manager for Empyrion: Galactic Survival</title>
 </head>
 <body>
 <div class="main_container" ng-app="dsmApp" ng-controller="frontEndCtrl">
 <div class="header">
-    <div class="headers">
-        <h1>Dedicated Server Manager for Empyrion: Galactic Survival</h1>
-        <h2 ng-if="authorized">Сервер: <span>{{server.name}}</span></h2>
-        <h2 ng-if="!authorized">Не авторизован</h2>
-    </div>
     <div class="main_stats" ng-if="authorized">
         <table>
             <tr>
@@ -25,6 +22,11 @@
                 <td>Игроков онлайн</td><td>{{mainstats.players}}</td>
             </tr>
         </table>
+    </div>
+    <div class="headers">
+        <h1>Dedicated Server Manager for Empyrion: Galactic Survival</h1>
+        <h2 ng-if="authorized">Сервер: <span>{{user.server}}</span></h2>
+        <h2 ng-if="!authorized">Не авторизован</h2>
     </div>
 
 </div>

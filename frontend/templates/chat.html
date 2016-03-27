@@ -1,10 +1,9 @@
 <div class="chat_list">
     <div class="chat_message" ng-repeat="message in messages track by message.id">
-        <span>{{message.datetime}}</span><span>{{message.player}}</span><span>{{message.text}}</span>
+        <span class="chat_date">{{message.datetime}}</span><span class="chat_player">{{message.player}}:</span><span>{{message.text}}</span>
     </div>
 </div>
 <div class="chat_write">
     <input ng-model="new_message" ng-disabled="sending">
     <input type="button" ng-click="sendMessage()" ng-disabled="sending" value="Send">
-</div><div>{{sending}}</div>
 <div class="chat_error" ng-if="error">An error occurred: {{error}}</div>
