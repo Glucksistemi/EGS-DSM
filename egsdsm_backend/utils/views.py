@@ -28,3 +28,8 @@ class JsonView(View):
                 }
             )
         )
+
+
+def prepare_date(dct, column='datetime', formats='%d %m %Y, %H:%M:%S'):
+    dct[column] = dct[column].strftime(formats)
+    return dct

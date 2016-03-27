@@ -19,6 +19,7 @@ PARSERS = (
 )
 ASKERS = {
     'chat': 'core.askers.chat.ChatAsker',
+    'sne': 'core.askers.saveandexit.SaveAndExitAsker'
 }
 
 SCHEDULE = (

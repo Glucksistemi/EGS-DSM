@@ -67,4 +67,5 @@ try:
             request_source = 0
 except:
     telnet_connect.close()
+    tcp_connect.close()
     raise

@@ -24,9 +24,6 @@
             <tr>
                 <td>Игроков онлайн</td><td>{{mainstats.players}}</td>
             </tr>
-            <tr>
-                <td></td><td>{{mainstats.playfields.total}}</td>
-            </tr>
         </table>
     </div>
 
@@ -39,11 +36,12 @@
         <p><button ng-click="sendAuthData()" ng-disabled="!(user.server && user.login && user.password)">Connect</button></p>
     </div>
     <div id="tabs" ng-if="authorized">
-        <div ng-repeat="tab in tabs" ng-class="(current_tab == tab) ? 'current' : ''">{{tab}}</div>
+        <div ng-repeat="tab in tabs" ng-class="(current_tab == tab) ? 'current' : ''" ng-click="openTab(tab)">{{tab}}</div>
     </div>
     <div class="current_tab" ng-if="authorized">
         <chat ng-if="current_tab == 'chat'" messages="chat" server="user.server"></chat>
         <players ng-if="current_tab == 'players'"></players>
+        <system ng-if="current_tab == 'system'" server="user.server"></system>
     </div>
 </div>
 <div class="footer">

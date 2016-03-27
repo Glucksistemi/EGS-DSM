@@ -8,7 +8,7 @@ class SocketHandler():
     test_other_try = 0
 
     def __init__(self, port, control_length=5):
-        if self.test_other_try:
+        if self.test_other_try:  # why I did it? J_0
             raise Exception('some bullshit happened')
         self.socket = socket.socket()
         self.socket.bind(('', port))
@@ -38,5 +38,3 @@ class SocketHandler():
     def close(self):
         self.socket.close()
 
-
-# TODO: add ClientSocket class to be added for askers who can ask to

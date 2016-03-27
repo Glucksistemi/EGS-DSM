@@ -5,9 +5,13 @@ app.controller('frontEndCtrl', function($scope, $http, $interval) {
     $scope.mainstats = {
         uptime: 0
     }
-    $scope.tabs = ['chat', 'players']
+    $scope.tabs = ['chat', 'system', 'players']
     $scope.current_tab = 'chat'
-    $scope.user = {}
+    $scope.user = {
+        server: 'localhost:8000',
+        login: 'gluck',
+        password: '123'
+    }
     $scope.timers = {
     }
     $scope.chat = []
@@ -22,13 +26,13 @@ app.controller('frontEndCtrl', function($scope, $http, $interval) {
                 }
             }
         )
-        $scope.timers.chat = $interval($scope.checkChat, 1000)
+        $scope.timers.chat = $interval($scope.checkChat, 10000)
+        $scope.checkHeartBeat()
+        $scope.timers.heartbeat = $interval($scope.checkHeartBeat, 60000)
     }
     //timers
     $scope.checkChat = function() {
-        console.log($scope.chat)
         if (!$scope.chat.length) {
-            console.log(1)
             var req = {}
         }
         else {
@@ -41,6 +45,13 @@ app.controller('frontEndCtrl', function($scope, $http, $interval) {
                 if (!resp.data.error) {
                     $scope.chat.push.apply($scope.chat, resp.data.chat)
                 }
+            }
+        )
+    }
+    $scope.checkHeartBeat = function() {
+        $http.post('http://'+$scope.user.server+'/heartbeat/', {}, {withCredentials: true}).then(
+            function(resp) {
+                $scope.mainstats = resp.data
             }
         )
     }

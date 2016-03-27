@@ -1,0 +1,33 @@
+<div>
+    <p>Reboot: <input type="button" ng-click="restartServer()" value="reboot"></p>
+    <hr>
+    <h4>Core logs: <input type="button" ng-click="updateCoreLog()" value="update"></h4>
+    <table>
+        <thead>
+        <tr>
+            <td>
+                Time
+            </td>
+            <td>
+                Level
+            </td>
+            <td>
+                Message
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in corelogdata">
+            <td>
+                {{row.datetime}}
+            </td>
+            <td>
+                {{row.level}}
+            </td>
+            <td>
+                {{row.message}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

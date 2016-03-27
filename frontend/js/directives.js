@@ -28,4 +28,35 @@ app.directive('chat', ['$http', function($http) {
         }
     }
 }])
+app.directive('system', ['$http', function($http){
+    return {
+        scope: {
+            server: '='
+        },
+        restrict: 'AE',
+        templateUrl: 'templates/system.html',
+        link: function($scope) {
+            $scope.rebooting = false
+            $scope.restartServer = function() {
+                $scope.rebooting = true
+                $http.post(
+                    'http://'+$scope.server+'/restart/', {},
+                    {withCredentials: true}).then(function (response) {
+                        $scope.rebooting = false
+                    }
+                )
+            }
+            $scope.updateCoreLog = function() {
+                console.log(111)
+                $http.post(
+                    'http://'+$scope.server+'/corelog/', {},
+                    {withCredentials: true}).then(function(resp) {
+                        $scope.corelogdata = resp.data
+                    }
+                )
+            }
+            $scope.updateCoreLog()
+        }
+    }
+}])
 
