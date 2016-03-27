@@ -1,5 +1,5 @@
 import re
-#from log import log
+from log import log
 
 
 class RegexpDriven():

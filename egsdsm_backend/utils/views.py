@@ -14,8 +14,9 @@ class JsonView(View):
 
     def post(self, request):
         self.request = request
-        if request.user.is_authentificated():
-            return HttpResponse(json.dumps(self.react(json.loads(request.POST['json']))))  # May require sending request
+        if request.user.is_authenticated():
+            data = json.loads(request.body)
+            return HttpResponse(json.dumps(self.react(data)))  # May require sending request
         else:
             return HttpResponse('{"unauthorized": true}')
 

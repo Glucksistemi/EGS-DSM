@@ -21,7 +21,9 @@ class SocketHandler():
         try: # avoid timeout errors to allow looping
             self.connection, address = self.socket.accept()
             self.connection.settimeout(1)
-            req_len = int(self.connection.recv(5))
+            req = self.connection.recv(5)
+            print req
+            req_len = int(req)
         except socket.timeout:
             req_len = 0
         if req_len:
