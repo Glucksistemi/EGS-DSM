@@ -68,4 +68,9 @@ try:
 except:
     telnet_connect.close()
     tcp_connect.close()
+    try:
+        log.log('error', 'DSM Stopped')
+    except:
+        pass
+    log.close()
     raise

@@ -8,8 +8,9 @@ def tcp_request(string):
         return ''
     sock = socket.socket()
     sock.connect(SOCKET_CONNECTION)
-    print unicode(len(string)).zfill(5) + string
-    sock.send(unicode(len(string)).zfill(5) + string)
+    string = string.encode('utf-8')
+    print str(len(string)).zfill(5) + string
+    sock.send(str(len(string)).zfill(5) + string)
     length = sock.recv(5)
     response = sock.recv(int(length))
     sock.close()

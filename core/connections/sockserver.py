@@ -27,7 +27,7 @@ class SocketHandler():
         except socket.timeout:
             req_len = 0
         if req_len:
-            return self.connection.recv(req_len)
+            return self.connection.recv(req_len).decode('utf-8')
         else:
             return None
 
