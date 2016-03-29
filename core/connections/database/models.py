@@ -41,6 +41,8 @@ class Playfield(Model):
         database = db
         db_table = 'playfields'
     name = CharField(max_length=64)
+    folder = CharField(max_length=64)
+    params = CharField(max_length=2048)
 
 
 class PlayerTransferEvent(Model):

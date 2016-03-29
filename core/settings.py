@@ -19,6 +19,7 @@ PARSERS = (
 )
 ASKERS = {
     'chat': 'core.askers.chat.ChatAsker',
+    'sne': 'core.askers.saveandexit.SaveAndExitAsker'
 }
 
 SCHEDULE = (
@@ -43,7 +44,7 @@ SCHEDULE = (
 # }
 DATABASE = {
     'type': 'sqlite',
-    'name': '/home/gluck/test.db',
+    'name': 'test.db',
     'params': {}
 }
 
@@ -57,4 +58,4 @@ LOG_LEVELS = {
     'stdout': LOG_LEVEL_DEBUG,
 }
 
-LOG_FILE = '/home/gluck/dsm{}.log'
+LOG_FILE = 'dsm-{}.log'

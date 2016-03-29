@@ -4,6 +4,7 @@ from schedule.timer import Timer
 import settings
 import imports
 from log import log
+from time import sleep
 
 
 parsers = imports.create_list_of_imported_objects(settings.PARSERS)
@@ -21,7 +22,15 @@ request_source = 0  # TODO: Constants for sources: 0 - none, 1 - parser, 2 - tim
 try:
     while not break_condition:
         request = None # request - variable with asker's name and string given to asker separated by space
-        line = telnet_connect.read_until('\r\n',0.1)
+        try:
+            line = telnet_connect.read_until('\r\n',0.1)
+        except:
+            try:
+                telnet_connect = get_authorized_connection(settings.HOST, settings.PASSWORD, settings.TELNET_PORT)
+            except:
+                log.log('error', 'no socket connection. retry in 5 seconds...')
+                sleep(5)
+            continue
         if line:
             log.log('debug', 'line: '+line)
             line = line.replace('\r\n', '')  # no EOL - no cross-platform problems;)
@@ -58,4 +67,10 @@ try:
             request_source = 0
 except:
     telnet_connect.close()
+    tcp_connect.close()
+    try:
+        log.log('error', 'DSM Stopped')
+    except:
+        pass
+    log.close()
     raise

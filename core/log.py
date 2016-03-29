@@ -27,7 +27,11 @@ class Log:
         if self.levels['stdout'] and self.levels['stdout'] >= level:
             print datetime.datetime.now().strftime('%Y %m %d-%H:%M') + ' ' + logstr
         if self.levels['database'] and self.levels['database'] >= level:
-            CoreLog.create()
+            CoreLog.create(
+                datetime=datetime.datetime.now(),
+                level=level,
+                message=logstr
+            )
 
     def close(self):
         self.file.close()
