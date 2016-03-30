@@ -1,0 +1,42 @@
+<div class="player_form">
+    <table>
+        <thead>
+        <tr>
+            <td>Nickname</td><td>State</td><td>Since</td><td>Playfield</td><td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="player in players track by player.steamid">
+            <td>
+                <span title="{{player.steam_id}}">{{player.nick_name}}</span>
+            </td>
+            <td>
+                {{player.state}}
+            </td>
+            <td>
+                {{player.since}}
+            </td>
+            <td>
+                {{player.playfield}}
+            </td>
+            <td>
+                <select ng-model="player.action">
+                    <option ng-if="player.state='online'" value="kick">
+                        kick
+                    </option>
+                    <option ng-if="player.state!='banned'" value="ban">
+                        ban
+                    </option>
+                    <option ng-if="player.state!='banned'" value="ban_9000">
+                        ban for 9000 days
+                    </option>
+                    <option ng-if="player.state='banned'" value="unban">
+                        unban
+                    </option>
+                </select>
+                <input type="button" value="do" ng-click="actWithPlayer(player)">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

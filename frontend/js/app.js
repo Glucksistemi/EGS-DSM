@@ -1,6 +1,6 @@
 app = angular.module('dsmApp', [])
 
-app.controller('frontEndCtrl', function($scope, $http, $interval) {
+app.controller('frontEndCtrl', function($scope, $http, $interval, $cookies) {
     //$scope.authorized = true
     $scope.mainstats = {
         uptime: 0
@@ -8,7 +8,7 @@ app.controller('frontEndCtrl', function($scope, $http, $interval) {
     $scope.tabs = ['chat', 'system', 'players']
     $scope.current_tab = 'chat'
     $scope.user = {
-        server: 'localhost:8000',
+        server: $cookies.get('last-server'),
         login: 'gluck',
         password: '123'
     }
@@ -20,6 +20,7 @@ app.controller('frontEndCtrl', function($scope, $http, $interval) {
             function (resp) {
                 if (!resp.data.error) {
                     $scope.authorized = true
+                    $cookies.put('last-server', $scope.user.server)
                 }
                 else {
                     $scope.error = resp.data.error
