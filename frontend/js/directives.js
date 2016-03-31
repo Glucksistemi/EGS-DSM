@@ -157,5 +157,21 @@ app.directive('terminal', ['AjaxSrv', '$interval', function(AjaxSrv, $interval){
                 }
             )
         }
+        $scope.sendCommand = function() {
+            $scope.sending = true
+            AjaxSrv.request(
+                '/terminal/send/',
+                {commmand: $scope.command},
+                function(resp){
+                    $scope.error = false
+                    $scope.sending = false
+                    $scope.command = ''
+                },
+                function(resp) {
+                    $scope.sending = false
+                    $scope.error = resp.status
+                }
+            )
+        }
     }
 }}])

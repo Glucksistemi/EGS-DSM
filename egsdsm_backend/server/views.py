@@ -26,10 +26,20 @@ class AmIAuthorized(JsonView):
 
 class RestartView(JsonView):
     def react(self, data):
-        request = tcp_request('sne do')
+        return tcp_request('sne do')
 
 
 class CoreLogView(JsonView):
     def react(self, data):
         print CoreLog.objects.all()[0:100].values()
         return [prepare_date(line) for line in CoreLog.objects.all()[0:100].values()]
+
+
+class TerminalGetView(JsonView):
+    def react(self, data):
+        return json.dumps(tcp_request('get_terminal_buffer'))
+
+
+class TerminalSendView(JsonView):
+    def react(self, data):
+        tcp_request('universal '+data['command'])

@@ -12,25 +12,37 @@ app.controller('frontEndCtrl', function($scope, $http, $interval, $cookies, Ajax
         login: 'gluck',//TODO: remove it from here after testing done
         password: '123'
     }
-    $scope.timers = {
-    }
+    $scope.timers = {}
     $scope.chat = []
+    $scope.setAuth = function(resp){
+        if (!resp.data.error && !resp.data.unathorized) {
+            $scope.authorized = true
+            $scope.auth_error = ''
+            $cookies.put('last-server', $scope.user.server)
+            AjaxSrv.server = $scope.user.server
+            $scope.checkChat()
+            $scope.timers.chat = $interval($scope.checkChat, 10000)
+            $scope.checkHeartBeat()
+            $scope.timers.heartbeat = $interval($scope.checkHeartBeat, 60000)
+        }
+        else {
+            $scope.authorized = false
+            $scope.auth_error = resp.data.error
+        }
+    }
+    $scope.authError = function(resp) {
+        $scope.auth_error = resp.status
+        $scope.authorized = false
+    }
+    $http.post(
+        'http://'+$scope.user.server+'/auth/check',
+        {},
+        {withCredentials: true}
+    ).then($scope.setAuth)
     $scope.sendAuthData = function() {
         $http.post('http://'+$scope.user.server+'/auth/', $scope.user, {withCredentials: true}).then(
-            function (resp) {
-                if (!resp.data.error) {
-                    $scope.authorized = true
-                    $cookies.put('last-server', $scope.user.server)
-                    AjaxSrv.server = $scope.user.server
-                }
-                else {
-                    $scope.error = resp.data.error
-                }
-            }
+            $scope.setAuth, $scope.authError
         )
-        $scope.timers.chat = $interval($scope.checkChat, 10000)
-        $scope.checkHeartBeat()
-        $scope.timers.heartbeat = $interval($scope.checkHeartBeat, 60000)
     }
     //timers
     $scope.checkChat = function() {

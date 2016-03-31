@@ -5,6 +5,7 @@ import settings
 import imports
 from log import log
 from time import sleep
+from buffer import TerminalBuffer
 
 
 parsers = imports.create_list_of_imported_objects(settings.PARSERS)
@@ -14,6 +15,7 @@ askers = imports.create_dict_of_imported_objects(settings.ASKERS)
 telnet_connect = get_authorized_connection(settings.HOST, settings.PASSWORD, settings.TELNET_PORT)
 tcp_connect = SocketHandler(settings.TCP_PORT, settings.SOCKET_CONTROL_LENGTH)
 timer = Timer(settings.SCHEDULE)
+terminal_buffer = TerminalBuffer
 
 break_condition = 0
 waiting_asker = False #name of asker waiting for answer (or False if no asker waiting)
@@ -21,7 +23,7 @@ request_source = 0  # TODO: Constants for sources: 0 - none, 1 - parser, 2 - tim
 
 try:
     while not break_condition:
-        request = None # request - variable with asker's name and string given to asker separated by space
+        request = None  # request - variable with asker's name and string given to asker separated by space
         try:
             line = telnet_connect.read_until('\r\n',0.1)
         except:
@@ -33,6 +35,7 @@ try:
             continue
         if line:
             log.log('debug', 'line: '+line)
+            terminal_buffer.write_line(line)
             line = line.replace('\r\n', '')  # no EOL - no cross-platform problems;)
             if waiting_asker:  # first - give the line to waiting asker (if any)
                 asker_response = askers[waiting_asker].parse(line) # give line to the asker
@@ -55,6 +58,9 @@ try:
             request_source = 2
         if not request:  # no request from parsers or timer? Try to get it from TCP
             request = tcp_connect.get_data_from_socket()
+            if request == 'get_terminal_buffer':
+                request = None
+                tcp_connect.send_response(terminal_buffer.get_buffer())
             request_source = 3
         if request:  # so if there's a request from any source...
             asker, asker_request = request.split(' ', 1)
