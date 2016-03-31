@@ -68,19 +68,19 @@ app.directive('pfconfig', ['$http', function($http) {
         templateUrl: 'templates/configs.html',
         link: function($scope) {
             $scope.updateConfig = function(){//TODO: reorganize width AjaxSrv
-                $http.post('http://'+$scope.server+'/config/playfield/load', {}, {withCredentials: true}).then(function(resp){
+                $http.post('http://'+$scope.server+'/config/playfield/load/', {}, {withCredentials: true}).then(function(resp){
                     $scope.playfields = resp.data
                 })
             }
             $scope.saveConfig = function(){//TODO: reorganize width AjaxSrv
-                $http.post('http://'+$scope.server+'/config/playfield/save', $scope.playfields, {withCredentials: true}).then(function(resp){
+                $http.post('http://'+$scope.server+'/config/playfield/save/', $scope.playfields, {withCredentials: true}).then(function(resp){
                     $scope.state = "Succesfully saved!"
                 })
             }
         }
     }
 }])
-app.directive('players', ['AjaxSrv', function($http){
+app.directive('players', ['AjaxSrv', function(AjaxSrv){
     return {
         scope: {
             server: '='
@@ -125,7 +125,7 @@ app.directive('players', ['AjaxSrv', function($http){
             $scope.players = []
             $scope.updateList = function (){
                 AjaxSrv.request(
-                    '/players/get',
+                    '/players/get/',
                     {},
                     function(resp){
                         $scope.players = resp.data
@@ -134,7 +134,7 @@ app.directive('players', ['AjaxSrv', function($http){
             }
             $scope.sendAction = function(player) {
                 AjaxSrv.request(
-                    '/players/do',
+                    '/players/do/',
                     $scope.actions[player.action](player.steam_id),
                     updateList
                 )
@@ -142,3 +142,20 @@ app.directive('players', ['AjaxSrv', function($http){
         }
     }
 }])
+app.directive('terminal', ['AjaxSrv', '$interval', function(AjaxSrv, $interval){ return {
+    scope: true,
+    restrict: 'AE',
+    templateUrl: 'templates/terminal.html',
+    link: function($scope) {
+        $scope.lines = []
+        $scope.loadBuffer = function(){
+            AjaxSrv.request(
+                '/terminal/get/',
+                {},
+                function(resp){
+                    $scope.lines = resp.data
+                }
+            )
+        }
+    }
+}}])
