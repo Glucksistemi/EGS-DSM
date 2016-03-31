@@ -1,5 +1,6 @@
 from core.workers import Asker
 from core.connections.database.utils import save_chat_message
+from log import log
 
 
 class ChatAsker(Asker):
@@ -7,7 +8,8 @@ class ChatAsker(Asker):
     regexp = r"^Message '(?P<msg>.*)' sent to all clients$"
 
     def on_ask(self, request):
-        return "say '" + request.replace("'", "`") + "'", True
+        string = "say '" + request.replace("'", "`") + "'"
+        return string, True
 
     def on_response(self, line, result):
         save_chat_message(message=result.groupdict()['msg'])

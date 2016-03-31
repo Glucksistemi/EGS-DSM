@@ -6,7 +6,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="player in players track by player.steamid">
+        <tr ng-repeat="player in players track by player.steam_id">
             <td>
                 <span title="{{player.steam_id}}">{{player.nick_name}}</span>
             </td>
@@ -39,4 +39,5 @@
         </tr>
         </tbody>
     </table>
+    <p><input type="button" value="Update" ng-click="updateList()"> </p>
 </div>

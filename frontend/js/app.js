@@ -1,15 +1,15 @@
-app = angular.module('dsmApp', [])
+app = angular.module('dsmApp', ['ngCookies'])
 
-app.controller('frontEndCtrl', function($scope, $http, $interval, $cookies) {
+app.controller('frontEndCtrl', function($scope, $http, $interval, $cookies, AjaxSrv) {
     //$scope.authorized = true
     $scope.mainstats = {
         uptime: 0
     }
-    $scope.tabs = ['chat', 'system', 'players']
+    $scope.tabs = ['chat', 'players', 'system', 'config']
     $scope.current_tab = 'chat'
     $scope.user = {
         server: $cookies.get('last-server'),
-        login: 'gluck',
+        login: 'gluck',//TODO: remove it from here after testing done
         password: '123'
     }
     $scope.timers = {
@@ -21,6 +21,7 @@ app.controller('frontEndCtrl', function($scope, $http, $interval, $cookies) {
                 if (!resp.data.error) {
                     $scope.authorized = true
                     $cookies.put('last-server', $scope.user.server)
+                    AjaxSrv.server = $scope.user.server
                 }
                 else {
                     $scope.error = resp.data.error

@@ -1,8 +1,7 @@
-app.directive('chat', ['$http', function($http) {
+app.directive('chat', ['AjaxSrv', function(AjaxSrv) {
     return {
         scope: {
-            messages: '=',
-            server: '='
+            messages: '='
         },
         restrict: 'AE',
         templateUrl: 'templates/chat.html',
@@ -13,17 +12,18 @@ app.directive('chat', ['$http', function($http) {
                     return
                 }
                 $scope.sending = true
-                $http.post(
-                    'http://'+$scope.server+'/chat/send/',
+                AjaxSrv.request(
+                    '/chat/send/',
                     {'message': $scope.new_message},
-                    {withCredentials: true}).then(function (response) {
-                    $scope.new_message = ''
-                    $scope.sending = false
-                },
-                function(response) {
-                    $scope.sending = false
-                    $scope.error = response.status
-                })
+                    function (response) {
+                        $scope.new_message = ''
+                        $scope.sending = false
+                    },
+                    function(response) {
+                        $scope.sending = false
+                        $scope.error = response.status
+                    }
+                )
             }
         }
     }
@@ -39,7 +39,7 @@ app.directive('system', ['$http', function($http){
             $scope.rebooting = false
             $scope.restartServer = function() {
                 $scope.rebooting = true
-                $http.post(
+                $http.post(//TODO: reorganize width AjaxSrv
                     'http://'+$scope.server+'/restart/', {},
                     {withCredentials: true}).then(function (response) {
                         $scope.rebooting = false
@@ -48,7 +48,7 @@ app.directive('system', ['$http', function($http){
             }
             $scope.updateCoreLog = function() {
                 console.log(111)
-                $http.post(
+                $http.post(//TODO: reorganize width AjaxSrv
                     'http://'+$scope.server+'/corelog/', {},
                     {withCredentials: true}).then(function(resp) {
                         $scope.corelogdata = resp.data
@@ -67,12 +67,12 @@ app.directive('pfconfig', ['$http', function($http) {
         restrict: 'AE',
         templateUrl: 'templates/configs.html',
         link: function($scope) {
-            $scope.updateConfig = function(){
+            $scope.updateConfig = function(){//TODO: reorganize width AjaxSrv
                 $http.post('http://'+$scope.server+'/config/playfield/load', {}, {withCredentials: true}).then(function(resp){
                     $scope.playfields = resp.data
                 })
             }
-            $scope.saveConfig = function(){
+            $scope.saveConfig = function(){//TODO: reorganize width AjaxSrv
                 $http.post('http://'+$scope.server+'/config/playfield/save', $scope.playfields, {withCredentials: true}).then(function(resp){
                     $scope.state = "Succesfully saved!"
                 })
@@ -80,7 +80,7 @@ app.directive('pfconfig', ['$http', function($http) {
         }
     }
 }])
-app.directive('players', ['$http', function($http){
+app.directive('players', ['AjaxSrv', function($http){
     return {
         scope: {
             server: '='
@@ -124,10 +124,20 @@ app.directive('players', ['$http', function($http){
             }
             $scope.players = []
             $scope.updateList = function (){
-                //TODO: http request
+                AjaxSrv.request(
+                    '/players/get',
+                    {},
+                    function(resp){
+                        $scope.players = resp.data
+                    }
+                )
             }
-            $scope.sendAction(player) {
-                
+            $scope.sendAction = function(player) {
+                AjaxSrv.request(
+                    '/players/do',
+                    $scope.actions[player.action](player.steam_id),
+                    updateList
+                )
             }
         }
     }

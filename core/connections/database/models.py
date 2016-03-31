@@ -60,7 +60,7 @@ class PlayerLogonEvent(Model):
         database = db
         db_table = 'player_logons'
     datetime = DateTimeField()
-    player_id = ForeignKeyField(Player, to_field='steam_id', related_name='logon_events')
+    player = ForeignKeyField(Player, to_field='steam_id', related_name='logon_events')
     action = IntegerField()  # 0 - asked for login, 1 - logged in, 2 - logged out
 
 

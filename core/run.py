@@ -60,7 +60,8 @@ try:
             asker, asker_request = request.split(' ', 1)
             command, wait_flag = askers[asker].ask(asker_request)  # ...give it to the asker
             if command: # and if asker gave us some response - feed it to the telnet
-                telnet_connect.write(command + '\n')
+                log.log('debug', command)
+                telnet_connect.write(command.encode('utf-8') + '\n')
                 if wait_flag:  # and if asker told us to keep flag - let's keep it
                     waiting_asker = asker
         else:

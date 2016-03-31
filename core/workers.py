@@ -40,7 +40,7 @@ class ManyRegexpDriven(RegexpDriven):
         self.on_init()
 
     def parse(self, line):
-        for name, rg in self.regexp_object:
+        for name, rg in self.regexp_object.iteritems():
             result = rg.match(line)
             if result:
                 return self.call_onmatch_metod(line, result, name)
