@@ -5,7 +5,7 @@ app.controller('frontEndCtrl', function($scope, $http, $interval, $cookies, Ajax
     $scope.mainstats = {
         uptime: 0
     }
-    $scope.tabs = ['chat', 'players', 'system', 'config']
+    $scope.tabs = ['chat', 'players', 'system', 'config', 'terminal']
     $scope.current_tab = 'chat'
     $scope.user = {
         server: $cookies.get('last-server'),
@@ -14,6 +14,7 @@ app.controller('frontEndCtrl', function($scope, $http, $interval, $cookies, Ajax
     }
     $scope.timers = {}
     $scope.chat = []
+    $scope.terminal_lines = []
     $scope.setAuth = function(resp){
         if (!resp.data.error && !resp.data.unathorized) {
             $scope.authorized = true
@@ -24,6 +25,7 @@ app.controller('frontEndCtrl', function($scope, $http, $interval, $cookies, Ajax
             $scope.timers.chat = $interval($scope.checkChat, 10000)
             $scope.checkHeartBeat()
             $scope.timers.heartbeat = $interval($scope.checkHeartBeat, 60000)
+            $scope.timers.terminal = $interval($scope.loadTerminalBuffer, 10000)
         }
         else {
             $scope.authorized = false
@@ -66,6 +68,15 @@ app.controller('frontEndCtrl', function($scope, $http, $interval, $cookies, Ajax
         $http.post('http://'+$scope.user.server+'/heartbeat/', {}, {withCredentials: true}).then(
             function(resp) {
                 $scope.mainstats = resp.data
+            }
+        )
+    }
+    $scope.loadTerminalBuffer = function(){
+        AjaxSrv.request(
+            '/terminal/get/',
+            {},
+            function(resp){
+                $scope.terminal_lines = $scope.terminal_lines.concat(resp.data)
             }
         )
     }

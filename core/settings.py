@@ -19,7 +19,8 @@ PARSERS = (
 )
 ASKERS = {
     'chat': 'core.askers.chat.ChatAsker',
-    'sne': 'core.askers.saveandexit.SaveAndExitAsker'
+    'sne': 'core.askers.saveandexit.SaveAndExitAsker',
+    'universal': 'core.askers.universal.UniversalAsker'
 }
 
 SCHEDULE = (
@@ -53,8 +54,8 @@ LOG_LEVEL_WARN = 2
 LOG_LEVEL_ERROR = 1
 
 LOG_LEVELS = {
-    'database': LOG_LEVEL_ERROR,
-    'file': LOG_LEVEL_WARN,
+    'database': LOG_LEVEL_WARN,
+    'file': False,
     'stdout': LOG_LEVEL_DEBUG,
 }
 

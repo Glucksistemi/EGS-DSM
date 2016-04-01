@@ -37,7 +37,9 @@ class CoreLogView(JsonView):
 
 class TerminalGetView(JsonView):
     def react(self, data):
-        return json.dumps(tcp_request('get_terminal_buffer'))
+        ret = json.loads(tcp_request('get_terminal_buffer'))
+        print ret
+        return ret
 
 
 class TerminalSendView(JsonView):

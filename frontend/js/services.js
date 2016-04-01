@@ -26,3 +26,28 @@ app.factory('AjaxSrv', ['$http', function($http){
         }
     }
 }])
+//
+//app.factory('TerminalSrv', ['AjaxSrv', '$interval', '$timeout', function(AjaxSrv, $interval, $timeout){ return {
+//    lines: [],
+//    concatLines: function(resp) {
+//        this.lines = this.lines.concat(resp.data)
+//    },
+//    loadBuffer: function(){
+//        AjaxSrv.request(
+//            '/terminal/get/',
+//            {},
+//            this.concatLines
+//        )
+//    },
+//    sendCommand: function(command, onSuccess, onError) {
+//        AjaxSrv.request(
+//            '/terminal/send/',
+//            {command: command},
+//            function(resp) {
+//                onSuccess(resp)
+//                $timeout(this.loadBuffer, 100)
+//            },
+//            onError
+//        )
+//    }
+//}}])

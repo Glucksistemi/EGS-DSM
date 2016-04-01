@@ -142,30 +142,24 @@ app.directive('players', ['AjaxSrv', function(AjaxSrv){
         }
     }
 }])
-app.directive('terminal', ['AjaxSrv', '$interval', function(AjaxSrv, $interval){ return {
-    scope: true,
+app.directive('terminal', ['AjaxSrv', '$timeout', function(AjaxSrv, $timeout){ return {
+    scope: {
+        lines: '=',
+        loadBuffer: '='
+    },
     restrict: 'AE',
     templateUrl: 'templates/terminal.html',
     link: function($scope) {
-        $scope.lines = []
-        $scope.loadBuffer = function(){
-            AjaxSrv.request(
-                '/terminal/get/',
-                {},
-                function(resp){
-                    $scope.lines = resp.data
-                }
-            )
-        }
         $scope.sendCommand = function() {
             $scope.sending = true
             AjaxSrv.request(
                 '/terminal/send/',
-                {commmand: $scope.command},
+                {command: $scope.command},
                 function(resp){
                     $scope.error = false
                     $scope.sending = false
                     $scope.command = ''
+                    $timeout($scope.loadBuffer, 100)
                 },
                 function(resp) {
                     $scope.sending = false

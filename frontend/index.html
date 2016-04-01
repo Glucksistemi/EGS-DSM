@@ -46,6 +46,7 @@
         <chat ng-if="current_tab == 'chat'" messages="chat" server="user.server"></chat>
         <players ng-if="current_tab == 'players'"></players>
         <system ng-if="current_tab == 'system'" server="user.server"></system>
+        <terminal ng-if="current_tab == 'terminal'" lines="terminal_lines", loadBuffer="loadTerminalBuffer"></terminal>
     </div>
 </div>
 <div class="footer">

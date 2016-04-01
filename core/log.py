@@ -16,7 +16,7 @@ class Log:
     def __init__(self):
         self.levels = LOG_LEVELS
         self.path = LOG_FILE
-        if self.path:
+        if self.path and self.levels['file']:
             self.file = open(self.path.format(datetime.datetime.now().strftime('%Y%m%d-%H%M')), 'w')
 
     def log(self, level, logstr):

@@ -22,7 +22,6 @@ class SocketHandler():
             self.connection, address = self.socket.accept()
             self.connection.settimeout(1)
             req = self.connection.recv(5)
-            print req
             req_len = int(req)
         except socket.timeout:
             req_len = 0

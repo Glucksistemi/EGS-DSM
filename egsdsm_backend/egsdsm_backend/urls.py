@@ -22,9 +22,14 @@ from statistics import views as v_statistics
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^auth/$', v_server.AuthView.as_view()),
+    url(r'^auth/check$', v_server.AmIAuthorized.as_view()),
     url(r'^chat/get/$', v_communication.ChatMessagesView.as_view()),
     url(r'^chat/send/$', v_communication.SendChatMessage.as_view()),
     url(r'^restart/$', v_server.RestartView.as_view()),
     url(r'^heartbeat/$', v_statistics.HeartBeatView.as_view()),
-    url(r'^corelog/$', v_server.CoreLogView.as_view())
+    url(r'^corelog/$', v_server.CoreLogView.as_view()),
+    url(r'^terminal/get/$', v_server.TerminalGetView.as_view()),
+    url(r'^terminal/send/$', v_server.TerminalSendView.as_view()),
+    url(r'^players/get/$', v_communication.PlayerInfo.as_view())
+
 ]

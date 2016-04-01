@@ -1,6 +1,5 @@
 from core.workers import Asker
 from core.connections.database.utils import save_chat_message
-from log import log
 
 
 class ChatAsker(Asker):

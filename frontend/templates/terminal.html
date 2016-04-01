@@ -1,6 +1,6 @@
 <div class="terminal">
     <div class="terminal_lines">
-        <div class="terminal_line" ng-repeat="for line in lines">
+        <div class="terminal_line" ng-repeat="line in lines track by $index">
             {{line}}
         </div>
         <div class="terminal_control"><input type="text" ng-model="command"><input type="button" ng-click="sendCommand()"></div>
