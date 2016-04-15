@@ -40,16 +40,29 @@ class ManyRegexpDriven(RegexpDriven):
         self.on_init()
 
     def parse(self, line):
-        for name, rg in self.regexp_object:
+        for name, rg in self.regexp_object.iteritems():
             result = rg.match(line)
             if result:
-                return self.call_onmatch_metod(line,result, name)
+                return self.call_onmatch_metod(line, result, name)
 
 
 class Parser(RegexpDriven):
     onmatch_method_name = 'on_match'
 
     def on_match(self, match_object, line, *args):
+        pass
+
+
+class ManyStringsParser(ManyRegexpDriven):
+    onmatch_method_name = 'on_match'
+
+    def on_match(self, regex_name, match_object, line, *args):
+        """
+        :param regex_name: name of regexp in regexp dict which was matched
+        :param match_object:
+        :param line:
+        :return:
+        """
         pass
 
 
@@ -81,7 +94,6 @@ class Asker(RegexpDriven):
         return 'ok', False
 
 
-class ManyStringsAsker(ManyRegexpDriven):
-    regexp = '' # regexp to parse response from server
-    onmatch_method_name = 'on_response'
+class ManyStringsAsker(ManyRegexpDriven, Asker):
+    pass
 

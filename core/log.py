@@ -16,7 +16,7 @@ class Log:
     def __init__(self):
         self.levels = LOG_LEVELS
         self.path = LOG_FILE
-        if self.path:
+        if self.path and self.levels['file']:
             self.file = open(self.path.format(datetime.datetime.now().strftime('%Y%m%d-%H%M')), 'w')
 
     def log(self, level, logstr):
@@ -27,7 +27,11 @@ class Log:
         if self.levels['stdout'] and self.levels['stdout'] >= level:
             print datetime.datetime.now().strftime('%Y %m %d-%H:%M') + ' ' + logstr
         if self.levels['database'] and self.levels['database'] >= level:
-            CoreLog.create()
+            CoreLog.create(
+                datetime=datetime.datetime.now(),
+                level=level,
+                message=logstr
+            )
 
     def close(self):
         self.file.close()

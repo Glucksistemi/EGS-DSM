@@ -10,8 +10,9 @@ class ChatParser(Parser):
 
     def on_match(self, line, match_object, *args):
         gdict = match_object.groupdict()
+        print gdict
         ChatMessage.create(
             datetime=datetime.datetime.now(),
-            player=get_player(gdict['nick_name']),
+            player=get_player(nick_name=gdict['nick_name']),
             message=gdict['msg']
         )

@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <!--Load all JS-->
     <script src="js/angular.min.js"></script>
-    <script type="text/javascript" src="js/controller.js"></script>
-    <title>Title</title>
+    <script src="js/angular-cookies.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+    <!--css-->
+    <link rel="stylesheet" href="css/base.css">
+    <title>Dedicated Server Manager for Empyrion: Galactic Survival</title>
 </head>
 <body>
-<div class="main_container" ng-app ng-controller="frontEndCtrl">
+<div class="main_container" ng-app="dsmApp" ng-controller="frontEndCtrl">
 <div class="header">
-    <div class="headers">
-        <h1>Dedicated Server Manager for Empyrion: Galactic Survival</h1>
-        <h2 ng-if="!authorized">Сервер: <span>{{server.name}}</span></h2>
-        <h2 ng-if="authorized">Не авторизован</h2>
-    </div>
     <div class="main_stats" ng-if="authorized">
         <table>
             <tr>
@@ -23,14 +23,31 @@
             <tr>
                 <td>Игроков онлайн</td><td>{{mainstats.players}}</td>
             </tr>
-            <tr>
-                <td></td><td>{{mainstats.playfields.total}}</td>
-            </tr>
         </table>
+    </div>
+    <div class="headers">
+        <h1>Dedicated Server Manager for Empyrion: Galactic Survival</h1>
+        <h2 ng-if="authorized">Сервер: <span>{{user.server}}</span></h2>
+        <h2 ng-if="!authorized">Не авторизован</h2>
     </div>
 
 </div>
-<div class="mainfield" ng-controller="mainCtrl">
+<div class="mainfield">
+    <div id="auth_form" ng-if="!authorized">
+        <p><span>Server: </span><input ng-model="user.server"></p>
+        <p><span>Login: </span><input ng-model="user.login"></p>
+        <p><span>Password: </span><input ng-model="user.password"></p>
+        <p><button ng-click="sendAuthData()" ng-disabled="!(user.server && user.login && user.password)">Connect</button></p>
+    </div>
+    <div id="tabs" ng-if="authorized">
+        <div ng-repeat="tab in tabs" ng-class="(current_tab == tab) ? 'current' : ''" ng-click="openTab(tab)">{{tab}}</div>
+    </div>
+    <div class="current_tab" ng-if="authorized">
+        <chat ng-if="current_tab == 'chat'" messages="chat" server="user.server"></chat>
+        <players ng-if="current_tab == 'players'"></players>
+        <system ng-if="current_tab == 'system'" server="user.server"></system>
+        <terminal ng-if="current_tab == 'terminal'" lines="terminal_lines", loadBuffer="loadTerminalBuffer"></terminal>
+    </div>
 </div>
 <div class="footer">
 

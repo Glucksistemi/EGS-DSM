@@ -1,0 +1,15 @@
+<div class="config">
+    <table>
+        <tr ng-repeat="pf in playfields track by pf.id">
+            <td>{{pf.name}}</td>
+            <td>
+                <input type="radio" name="{{pf.name}}" ng-model="pf.PvP" ng-value="true"> PvP
+                <input type="radio" name="{{pf.name}}" ng-model="pf.PvP" ng-value="false"> PvE
+            </td>
+        </tr>
+    </table>
+    <div class="config_controls">
+        <input type="button" ng-click="updateConfig()" value="Refresh">
+        <input type="button" ng-click="saveConfig()" value="Save">
+    </div>
+</div>

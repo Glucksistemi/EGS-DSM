@@ -1,0 +1,43 @@
+body {
+    background-color: #ccc;
+}
+.main_container .header, .mainfield, .footer {
+    margin: 20px;
+    padding: 10px;
+    background-color: white;
+}
+.main_stats {
+    float: right;
+}
+#tabs div {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #eee;
+    border: solid 1px black;
+}
+
+#tabs div.current {
+    font-weight: bold;
+    background-color: #def;
+}
+.current_tab {
+    border: solid 1px black;
+    padding: 10px;
+}
+
+/*TODO: вынести стили для директив в отдельные файлы*/
+
+.chat_list {
+    height: 300px;
+    width: 40%;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    overflow-y: scroll;
+}
+
+.chat_message span {
+    margin: 0 5px;
+}
+
+.chat_player {
+    font-weight: bold;
+}

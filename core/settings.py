@@ -19,6 +19,8 @@ PARSERS = (
 )
 ASKERS = {
     'chat': 'core.askers.chat.ChatAsker',
+    'sne': 'core.askers.saveandexit.SaveAndExitAsker',
+    'universal': 'core.askers.universal.UniversalAsker'
 }
 
 SCHEDULE = (
@@ -43,7 +45,7 @@ SCHEDULE = (
 # }
 DATABASE = {
     'type': 'sqlite',
-    'name': '/home/gluck/test.db',
+    'name': 'test.db',
     'params': {}
 }
 
@@ -52,9 +54,9 @@ LOG_LEVEL_WARN = 2
 LOG_LEVEL_ERROR = 1
 
 LOG_LEVELS = {
-    'database': LOG_LEVEL_ERROR,
-    'file': LOG_LEVEL_WARN,
+    'database': LOG_LEVEL_WARN,
+    'file': False,
     'stdout': LOG_LEVEL_DEBUG,
 }
 
-LOG_FILE = '/home/gluck/dsm{}.log'
+LOG_FILE = 'dsm-{}.log'

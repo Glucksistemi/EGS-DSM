@@ -8,7 +8,6 @@ class HeartBeatParser(Parser):
     regexp = r'^(?P<date>[0-9:.-]{15}) Uptime=(?P<hours>\d+)h(?P<minutes>\d+)m heap=(?P<heap>[0-9.]+)MB fps=(?P<fps>[0-9.]+) players=(?P<players>\d+)$'
 
     def on_match(self, line, match_object, *args):
-        print match_object.groupdict()
         groupdict = match_object.groupdict()
         uptime = int(groupdict['hours']) * 60 + int(groupdict['minutes'])
         del groupdict['date']

@@ -22,6 +22,8 @@ class Playfield(models.Model):
     class Meta:
         db_table = 'playfields'
     name = models.CharField(max_length=64)
+    folder = models.CharField(max_length=64)
+    params = models.CharField(max_length=2048)
 
 
 class PlayerTransferEvent(models.Model):
@@ -45,4 +47,11 @@ class ChatMessage(models.Model):
         db_table = 'chat'
     datetime = models.DateTimeField()
     player = models.ForeignKey(Player, to_field='steam_id')
+    message = models.CharField(max_length=1024)
+
+class CoreLog(models.Model):
+    class Meta:
+        db_table = 'corelog'
+    datetime = models.DateTimeField()
+    level = models.IntegerField()
     message = models.CharField(max_length=1024)

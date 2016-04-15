@@ -41,6 +41,8 @@ class Playfield(Model):
         database = db
         db_table = 'playfields'
     name = CharField(max_length=64)
+    folder = CharField(max_length=64)
+    params = CharField(max_length=2048)
 
 
 class PlayerTransferEvent(Model):
@@ -58,7 +60,7 @@ class PlayerLogonEvent(Model):
         database = db
         db_table = 'player_logons'
     datetime = DateTimeField()
-    player_id = ForeignKeyField(Player, to_field='steam_id', related_name='logon_events')
+    player = ForeignKeyField(Player, to_field='steam_id', related_name='logon_events')
     action = IntegerField()  # 0 - asked for login, 1 - logged in, 2 - logged out
 
 
