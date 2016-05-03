@@ -11,11 +11,11 @@ TCP_PORT = 42404
 PARSERS = (
     'parsers.chat.ChatParser',
     'parsers.heartbeat.HeartBeatParser',
-    'parsers.playerenterpf.PlayerEnterPFParser',
-    'parsers.playerexitpf.PlayerExitPFParser',
-    'parsers.playerconnected.PlayerConnectedParser',
-    'parsers.playerdisconnected.PlayerDisonnectedParser',
-    'parsers.loginask.LoginAskParser'
+    # 'parsers.playerenterpf.PlayerEnterPFParser',
+    # 'parsers.playerexitpf.PlayerExitPFParser',
+    # 'parsers.playerconnected.PlayerConnectedParser',
+    # 'parsers.playerdisconnected.PlayerDisonnectedParser',
+    # 'parsers.loginask.LoginAskParser'
 )
 ASKERS = {
     'chat': 'core.askers.chat.ChatAsker',

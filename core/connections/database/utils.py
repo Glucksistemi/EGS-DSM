@@ -14,7 +14,11 @@ def get_player(nick_name='', steam_id=''):
     """
     print nick_name, steam_id
     if nick_name and not steam_id:
-        return Player.get(nick_name=nick_name)
+        try:  # FIXME: temporary crutch while checking old players steam_id is impossible (asker required)
+            return Player.get(nick_name=nick_name)
+        except:
+            player = Player.create(steam_id=0, nick_name=nick_name)
+            return player
     elif steam_id and not nick_name:
         return Player.get(steam_id=steam_id)
     elif steam_id and nick_name:
