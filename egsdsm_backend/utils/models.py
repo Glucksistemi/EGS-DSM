@@ -14,7 +14,7 @@ class HeartBeat(models.Model):
 class Player(models.Model):
     class Meta:
         db_table = 'players'
-    steam_id = models.CharField(max_length=23, unique=True)
+    steam_id = models.CharField(max_length=23)
     nick_name = models.CharField(max_length=256)
 
 
