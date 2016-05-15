@@ -10,10 +10,10 @@ class ScheduledTask:
     def __init__(self, command, repeater, **kwargs):
         self.command = command
         self.repeater = REPEATER_REGISTRY[repeater]()
-        self.next_launch = self.repeater.schedule_next_launch(**kwargs)
+        self.next_launch = self.repeater.schedule_next_launch(init=True, **kwargs)
 
     def get_command(self):
-        if time.time() >= self.next_launch:
+        if self.next_launch and time.time() >= self.next_launch:
             self.next_launch = self.repeater.schedule_next_launch()
             return self.command
         return None

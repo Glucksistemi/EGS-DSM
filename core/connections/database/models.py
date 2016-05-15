@@ -32,7 +32,7 @@ class Player(Model):
     class Meta:
         database = db
         db_table = 'players'
-    steam_id = CharField(max_length=23, unique=True)
+    steam_id = CharField(max_length=23)
     nick_name = CharField(max_length=256)
 
 
